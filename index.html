@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<style>
+.vert-offset-top-10 {
+    margin-top: 10em;
+}
+.vert-offset-top-6{
+    margin-top: 6em;
+}
+.vert-offset-bottom-1{
+    margin-bottom: 1em;
+}
+</style>
+<script>
+var noElements = 2;
+function add() {
+    var shouldAdd = true;
+    for (i = 0; i < noElements; i++) {
+        var position = +i + +1;
+        var id = "txt" + position;
+        var value = document.getElementById(id).value;
+        if (value == "") {
+            shouldAdd = false;
+        }
+    }
+    if (shouldAdd) {
+        noElements++;
+        var element = document.createElement("input");
+        element.setAttribute("type", "text");
+        element.setAttribute("id", "txt" + noElements);
+        element.setAttribute("class", "form-control vert-offset-bottom-1");
+        element.setAttribute("onkeyup", "sum(); add()");
+        var foo = document.getElementById("addHere");
+        foo.appendChild(element);
+    }
+}
+function sum(){
+
+    var result = 0;
+
+    for (i = 0; i < noElements; i++) {
+        var position = +i + +1;
+        var id = "txt" + position;
+        var value = document.getElementById(id).value;
+        if (value == "") {
+            value = 0;
+        }
+        result += +value;
+    }
+
+    if (!isNaN(result)) {
+        document.getElementById('answer').value = result;
+    }
+}</script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-md-offset-2 vert-offset-top-6">
+
+            <span id="addHere">
+                <input type="text" id="txt1" class="form-control vert-offset-bottom-1" onkeyup="sum(); add()">
+                <input type="text" id="txt2" class="form-control vert-offset-bottom-1" onkeyup="sum(); add()">
+            </span>
+        </div><!--
+        --><div class="col-md-3 col-md-offset-2 vert-offset-top-10">
+            <input id="answer" class="form-control" disabled>
+        </div>
+    </div>
+</div>
+</body>
+</html>
